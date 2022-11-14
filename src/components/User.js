@@ -1,6 +1,6 @@
 import "../style/User.css";
 
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiHomeSmile, BiPhone, BiUser, BiEnvelope } from "react-icons/bi";
 
 export function User() {
