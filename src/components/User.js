@@ -1,10 +1,15 @@
 import "../style/User.css";
 
 import React, { useEffect, useState } from "react";
-import { BiHomeSmile, BiPhone, BiUser, BiEnvelope } from "react-icons/bi";
+import { BiHomeSmile, BiPhone, BiUser, BiEnvelope, BiLockOpenAlt } from "react-icons/bi";
 
 export function User() {
   const [data, setData] = useState([]);
+  const [name, setName] = useState(false);
+  const [location, setLocation] = useState(false);
+  const [number, setNumber] = useState(false);
+  const [email, setEmail] = useState(false);
+  const [password, setPassword] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +20,8 @@ export function User() {
     fetchData();
   }, []);
 
+  
+
   return (
     <div className="container">
       {data.map((item, index) => {
@@ -24,21 +31,21 @@ export function User() {
               <div className="img-container">
                 <img src={item.picture.large} alt="#" />
                 <h3> {item.login.username} </h3>
-                <p>My password is: {item.login.password}</p>
+                
               </div>
               <div className="user">
               
 
               <div className="row">
-                <BiUser className="icons" />
-                <h3>
+                <BiUser onMouseLeave={()=>{setName(false)}}  onMouseOver={()=>{setName(true)}} className="icons" />
+                { name && <h3> 
                   My Name is: {item.name.first} {item.name.last}
-                </h3>
+                </h3>}
               </div>
 
               <div className="row">
-                <BiHomeSmile className="icons" />
-                <p>
+                <BiHomeSmile onMouseLeave={()=>{setLocation(false)}}  onMouseOver={()=>{setLocation(true)}} className="icons" />
+                { location && <p>
                   <strong>City: </strong>
                   {item.location.city}
                   <br />
@@ -47,20 +54,27 @@ export function User() {
                   <br />
                   <strong>Country: </strong>
                   {item.location.country}
-                </p>
+                </p>}
               </div>
 
               <div className="row">
-                <BiPhone className="icons" />
-                <p>
+                <BiPhone onMouseLeave={()=>{setNumber(false)}}  onMouseOver={()=>{setNumber(true)}} className="icons" />
+                { number && <p>
                   {item.phone} | {item.cell}
-                </p>
+                </p>}
               </div>
 
               <div className="row">
-                <BiEnvelope className="icons" />
-                <p> {item.email}</p>
+                <BiEnvelope onMouseLeave={()=>{setEmail(false)}}  onMouseOver={()=>{setEmail(true)}} className="icons" />
+                { email && <p> {item.email}</p>}
               </div>
+              
+              <div className="row">
+                  <BiLockOpenAlt onMouseLeave={()=>{setPassword(false)}}  onMouseOver={()=>{setPassword(true)}} className="icons" />
+              { password && <p>My password is: {item.login.password}</p>}
+
+              </div>
+
             </div>
           </div>
         );
